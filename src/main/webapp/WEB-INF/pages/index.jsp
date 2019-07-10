@@ -24,12 +24,30 @@
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.9.1/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript"
+            src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.9.1/jquery.tablesorter.min.js"></script>
+
     <script>
-        $(function(){
-            $("#table-id").tablesorter();
+        $.noConflict();
+        jQuery(document).ready(function($){
+            $(function () {
+                $("#table-id").tablesorter();
+            });
         });
     </script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#birth-datepicker").datepicker();
+        });
+    </script>
+    <script>
+        $(function () {
+            $("#payroll-datepicker").datepicker();
+        });
+    </script>
+
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/crud" method="post">
@@ -44,41 +62,41 @@
     surname:<input type="text" name="surname"><br>
     salary:<input type="text" name="salary"/><br>
     email:<input type="text" name="email"><br>
-    birth date:<input type="text" name="birthDate"><br>
+    birth date:<input type="text" id="birth-datepicker" name="birthDate"><br>
     department:<input type="text" name="department"><br>
-    last payroll date<input type="text" name="lastPayrollDate">
+    last payroll date<input type="text" id="payroll-datepicker" name="lastPayrollDate">
     <input type="submit"/>
 </form>
 </br>
-    <table id="table-id" class="table tablesorter table-hoover">
-        <thead>
+<table id="table-id" class="table tablesorter table-hoover">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Salary</th>
+        <th>Birth date</th>
+        <th>Department</th>
+        <th>Last payroll date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${employees}" var="employees">
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Email</th>
-            <th>Salary</th>
-            <th>Birth date</th>
-            <th>Department</th>
-            <th>Last payroll date</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${employees}" var="employees">
-            <tr>
-                <td>id=${employees.id}</td>
-                <td>${employees.name}</td>
-                <td>${employees.surname}</td>
-                <td>${employees.email}</td>
-                <td>${employees.salary}</td>
-                <td>${employees.birthDate}</td>
-                <td>${employees.departmentName}</td>
-                <td>${employees.lastPayrollDate}</td>
+            <td>id=${employees.id}</td>
+            <td>${employees.name}</td>
+            <td>${employees.surname}</td>
+            <td>${employees.email}</td>
+            <td>${employees.salary}</td>
+            <td>${employees.birthDate}</td>
+            <td>${employees.departmentName}</td>
+            <td>${employees.lastPayrollDate}</td>
 
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
 
 </body>
 </html>
