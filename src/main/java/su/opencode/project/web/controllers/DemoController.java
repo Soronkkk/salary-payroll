@@ -44,9 +44,9 @@ public class DemoController {
             newEmployees.setName(name);
             newEmployees.setSalary(salary);
             newEmployees.setSurname(surname);
-            newEmployees.setBirthDate(birthDate);
+            newEmployees.setBirthDate(LocalDate.now());
             newEmployees.setDepartmentName(departmentName);
-            newEmployees.setLastPayrollDate(lastPayrollDate);
+            newEmployees.setLastPayrollDate(LocalDate.now());
             newEmployees.setEmail(email);
             employeesDataService.save(newEmployees);
         } else if ("find".equals(action)) {

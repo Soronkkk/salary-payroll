@@ -51,6 +51,7 @@
             <th>Id</th>
             <th>Name</th>
             <th>Surname</th>
+            <th>Email</th>
             <th>Salary</th>
             <th>Birth date</th>
             <th>Department</th>
@@ -62,6 +63,8 @@
             <tr>
                 <td>id=${employees.id}</td>
                 <td>${employees.name}</td>
+                <td>${employees.surname}</td>
+                <td>${employees.email}</td>
                 <td>${employees.salary}</td>
                 <td>${employees.birthDate}</td>
                 <td>${employees.departmentName}</td>
