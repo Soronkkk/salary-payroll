@@ -23,6 +23,8 @@ public class Employees implements Serializable {
     @Column(name = "CREATED_WHEN", nullable = false)
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date createdWhen;
+    @Column(name="SALARY", nullable = false)
+    private int Salary;
 
     public Employees() {
     }
@@ -62,6 +64,14 @@ public class Employees implements Serializable {
 
     public void setCreatedWhen(Date createdWhen) {
         this.createdWhen = createdWhen;
+    }
+
+    public int getSalary() {
+        return Salary;
+    }
+
+    public void setSalary(int salary) {
+        Salary = salary;
     }
 
     @Override

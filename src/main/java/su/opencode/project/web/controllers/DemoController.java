@@ -25,7 +25,8 @@ public class DemoController {
     public ModelAndView crud(
             @RequestParam("action") String action,
             @RequestParam("name") String name,
-            @RequestParam("id") Long id
+            @RequestParam("id") Long id,
+            @RequestParam("salary") int salary
     ) {
         List<Employees> employees = new ArrayList<>();
         if ("delete".equals(action)) {
@@ -33,6 +34,7 @@ public class DemoController {
         } else if ("save".equals(action)) {
             Employees newEmployees = new Employees("test", new Date());
             newEmployees.setName(name);
+            newEmployees.setSalary(salary);
             employeesDataService.save(newEmployees);
         } else if ("find".equals(action)) {
             Optional<Employees> optionalEmployees = employeesDataService.findByName(name);
