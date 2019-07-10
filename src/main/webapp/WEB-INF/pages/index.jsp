@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.2/dist/bootstrap-table.min.css">
-    <link rel="stylesheet" href="https://drvic10k.github.io/bootstrap-sortable/Contents/bootstrap-sortable.css" />
+    <link rel="stylesheet" href="https://drvic10k.github.io/bootstrap-sortable/Contents/bootstrap-sortable.css"/>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -58,8 +58,12 @@
     <div class="form-row" style="text-align: center;">
         <%--Job Title--%>
         <div class="col-md-4 mb-3">
-            <label for="validationTooltip01">Job Title</label>
-            <input type="text" name="jobTitle" class="form-control" id="validationTooltip01" placeholder="Job Title" required>
+            <label for="jobTitle">Job title</label>
+            <select name="jobTitle" id="jobTitle" class="form-control">
+                <option value="Программист">Программист</option>
+                <option value="Менеджер">Менеджер</option>
+                <option value="Дизайнер">Дизайнер</option>
+            </select>
         </div>
         <%--Name--%>
         <div class="col-md-4 mb-3">
@@ -87,14 +91,17 @@
         <%--Birth date--%>
         <div class="col-md-4 mb-3">
             <label for="birth-datepicker">Birth date</label>
-            <input type="text" name="birthDate" class="form-control"  id="birth-datepicker" placeholder="Birth date"
+            <input type="text" name="birthDate" class="form-control" id="birth-datepicker" placeholder="Birth date"
                    required>
         </div>
         <%--Department--%>
         <div class="col-md-4 mb-3">
-            <label for="validationTooltip06">Department</label>
-            <input type="text" name="department" class="form-control" id="validationTooltip06" placeholder="Department"
-                   required>
+            <label for="department">Department</label>
+            <select name="department" id="department" class="form-control">
+                <option value="Отдел кадров">Отдел кадров</option>
+                <option value="Отдел разработки">Отдел разработки</option>
+                <option value="Отдел проектировки">Отдел проектирования</option>
+            </select>
         </div>
         <%--Last payroll date--%>
         <div class="col-md-4 mb-3">
@@ -147,7 +154,7 @@
     <tbody>
     <c:forEach items="${employees}" var="employees">
         <tr>
-            <%--<td>id=${employees.id}</td>--%>
+                <%--<td>id=${employees.id}</td>--%>
             <td>${employees.jobTitle}</td>
             <td>${employees.name}</td>
             <td>${employees.surname}</td>

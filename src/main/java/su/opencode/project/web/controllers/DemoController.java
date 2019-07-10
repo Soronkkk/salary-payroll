@@ -30,7 +30,7 @@ public class DemoController {
             @RequestParam("action") String action,
             @RequestParam("name") String name,
             @RequestParam("surname") String surname,
-            @RequestParam("jobTitle") JobTitle jobTitle,
+            @RequestParam("jobTitle") String jobTitle,
             @RequestParam("salary") int salary,
             @RequestParam("birthDate") String birthDate,
             @RequestParam("department") String departmentName,

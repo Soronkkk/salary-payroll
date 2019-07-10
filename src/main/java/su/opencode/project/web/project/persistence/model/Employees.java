@@ -19,7 +19,7 @@ public class Employees implements Serializable {
     private Long id;
 
     @Column(name = "JOB_TITLE", nullable = false)
-    private JobTitle jobTitle;
+    private String jobTitle;
 
     @Column(name = "NAME", nullable = false)
     private String name;
@@ -138,11 +138,11 @@ public class Employees implements Serializable {
         this.email = email;
     }
 
-    public JobTitle getJobTitle() {
+    public String getJobTitle() {
         return jobTitle;
     }
 
-    public void setJobTitle(JobTitle jobTitle) {
+    public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
 
