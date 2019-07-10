@@ -56,10 +56,10 @@
 
 <form action="${pageContext.request.contextPath}/crud" method="post" class="needs-validation" novalidate>
     <div class="form-row" style="text-align: center;">
-        <%--Id--%>
+        <%--Job Title--%>
         <div class="col-md-4 mb-3">
-            <label for="validationTooltip01">Id</label>
-            <input type="text" name="id" class="form-control" id="validationTooltip01" placeholder="Id" required>
+            <label for="validationTooltip01">Job Title</label>
+            <input type="text" name="jobTitle" class="form-control" id="validationTooltip01" placeholder="Job Title" required>
         </div>
         <%--Name--%>
         <div class="col-md-4 mb-3">
@@ -133,7 +133,8 @@
 <table id="table-id" class="table table-striped table-bordered sortable" style="width:100%">
     <thead>
     <tr>
-        <th>Id</th>
+        <%--<th>Id</th>--%>
+        <th>Job Title</th>
         <th>Name</th>
         <th>Surname</th>
         <th>Email</th>
@@ -146,7 +147,8 @@
     <tbody>
     <c:forEach items="${employees}" var="employees">
         <tr>
-            <td>id=${employees.id}</td>
+            <%--<td>id=${employees.id}</td>--%>
+            <td>${employees.jobTitle}</td>
             <td>${employees.name}</td>
             <td>${employees.surname}</td>
             <td>${employees.email}</td>
