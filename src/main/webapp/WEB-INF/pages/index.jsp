@@ -9,11 +9,11 @@
 
     <title>Тестовая система</title>
 
-    <link href="dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.2/dist/bootstrap-table.min.css">
+
     <link rel="stylesheet" href="https://drvic10k.github.io/bootstrap-sortable/Contents/bootstrap-sortable.css"/>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -27,7 +27,6 @@
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
     <script src="https://unpkg.com/bootstrap-table@1.15.2/dist/bootstrap-table.min.js"></script>
-
     <script src="https://drvic10k.github.io/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
 
 
@@ -38,14 +37,20 @@
     <script>
         $(function () {
             $("#birth-datepicker").datepicker({
-                dateFormat: "yy-mm-dd"
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-100:+0"
             });
         });
     </script>
     <script>
         $(function () {
             $("#payroll-datepicker").datepicker({
-                dateFormat: "yy-mm-dd"
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-100:+0"
             });
         });
     </script>
@@ -54,7 +59,8 @@
 <body>
 
 
-<form action="${pageContext.request.contextPath}/crud" method="post" class="needs-validation" novalidate>
+<form autocomplete="off" action="${pageContext.request.contextPath}/crud" method="post" class="needs-validation"
+      novalidate>
     <div class="form-row" style="text-align: center;">
         <%--Job Title--%>
         <div class="col-md-4 mb-3">
@@ -140,8 +146,7 @@
 <table id="table-id" class="table table-striped table-bordered sortable" style="width:100%">
     <thead>
     <tr>
-        <%--<th>Id</th>--%>
-        <th>Job Title</th>
+        <th contenteditable="true">Job Title</th>
         <th>Name</th>
         <th>Surname</th>
         <th>Email</th>
@@ -154,7 +159,6 @@
     <tbody>
     <c:forEach items="${employees}" var="employees">
         <tr>
-                <%--<td>id=${employees.id}</td>--%>
             <td>${employees.jobTitle}</td>
             <td>${employees.name}</td>
             <td>${employees.surname}</td>
