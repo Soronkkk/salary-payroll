@@ -24,9 +24,14 @@
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
 
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.9.1/jquery.tablesorter.min.js"></script>
+    <script>
+        $(function(){
+            $("#table-id").tablesorter();
+        });
+    </script>
 </head>
 <body>
-
 <form action="${pageContext.request.contextPath}/crud" method="post">
     <div>
         <p><input type="radio" name="action" value="save">save</p>
@@ -45,7 +50,7 @@
     <input type="submit"/>
 </form>
 </br>
-    <table class="table table-hoover">
+    <table id="table-id" class="table tablesorter table-hoover">
         <thead>
         <tr>
             <th>Id</th>
