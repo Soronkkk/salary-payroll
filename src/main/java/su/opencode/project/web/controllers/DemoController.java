@@ -31,9 +31,9 @@ public class DemoController {
             @RequestParam("surname") String surname,
             @RequestParam("id") Long id,
             @RequestParam("salary") int salary,
-            @RequestParam("birthDate") LocalDate birthDate,
+            @RequestParam("birthDate") String birthDate,
             @RequestParam("department") String departmentName,
-            @RequestParam("lastPayrollDate") LocalDate lastPayrollDate,
+            @RequestParam("lastPayrollDate") String lastPayrollDate,
             @RequestParam("email") String email
     ) {
         List<Employees> employees = new ArrayList<>();
@@ -44,9 +44,9 @@ public class DemoController {
             newEmployees.setName(name);
             newEmployees.setSalary(salary);
             newEmployees.setSurname(surname);
-            newEmployees.setBirthDate(LocalDate.now());
+            newEmployees.setBirthDate(LocalDate.parse(birthDate));
             newEmployees.setDepartmentName(departmentName);
-            newEmployees.setLastPayrollDate(LocalDate.now());
+            newEmployees.setLastPayrollDate(LocalDate.parse(lastPayrollDate));
             newEmployees.setEmail(email);
             employeesDataService.save(newEmployees);
         } else if ("find".equals(action)) {

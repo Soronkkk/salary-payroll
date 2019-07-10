@@ -9,9 +9,12 @@
 
     <title>Тестовая система</title>
 
+    <link href="dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.2/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="https://drvic10k.github.io/bootstrap-sortable/Contents/bootstrap-sortable.css" />
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -23,18 +26,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.15.2/dist/bootstrap-table.min.js"></script>
 
-    <script type="text/javascript"
-            src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.9.1/jquery.tablesorter.min.js"></script>
+    <script src="https://drvic10k.github.io/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
 
-    <script>
-        $.noConflict();
-        jQuery(document).ready(function ($) {
-            $(function () {
-                $("#table-id").tablesorter();
-            });
-        });
-    </script>
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -42,12 +37,16 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(function () {
-            $("#birth-datepicker").datepicker();
+            $("#birth-datepicker").datepicker({
+                dateFormat: "yy-mm-dd"
+            });
         });
     </script>
     <script>
         $(function () {
-            $("#payroll-datepicker").datepicker();
+            $("#payroll-datepicker").datepicker({
+                dateFormat: "yy-mm-dd"
+            });
         });
     </script>
 
@@ -88,7 +87,7 @@
         <%--Birth date--%>
         <div class="col-md-4 mb-3">
             <label for="birth-datepicker">Birth date</label>
-            <input type="text" name="birthDate" class="form-control" id="birth-datepicker" placeholder="Birth date"
+            <input type="text" name="birthDate" class="form-control"  id="birth-datepicker" placeholder="Birth date"
                    required>
         </div>
         <%--Department--%>
@@ -105,20 +104,21 @@
                    required>
         </div>
         <div class="col-md-4 mb-3">
-            <label for="radioLines" >Select an action</label>
+            <label for="radioLines">Select an action</label>
             <div id="radioLines">
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline1" name="action" value="save" class="custom-control-input">
-                <label class="custom-control-label" for="customRadioInline1">Add employee</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline2" name="action" value="delete" class="custom-control-input">
-                <label class="custom-control-label" for="customRadioInline2">Delete</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline3" name="action" value="find" class="custom-control-input">
-                <label class="custom-control-label" for="customRadioInline3">Find</label>
-            </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" name="action" value="save" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioInline1">Add employee</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" name="action" value="delete"
+                           class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioInline2">Delete</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline3" name="action" value="find" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioInline3">Find</label>
+                </div>
             </div>
         </div>
     </div>
@@ -130,7 +130,7 @@
 
 
 </br>
-<table id="table-id" class="table table-hover tablesorter">
+<table id="table-id" class="table table-striped table-bordered sortable" style="width:100%">
     <thead>
     <tr>
         <th>Id</th>
@@ -154,7 +154,6 @@
             <td>${employees.birthDate}</td>
             <td>${employees.departmentName}</td>
             <td>${employees.lastPayrollDate}</td>
-
         </tr>
     </c:forEach>
     </tbody>
