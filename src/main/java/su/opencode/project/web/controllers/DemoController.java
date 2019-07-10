@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import su.opencode.project.web.project.persistence.model.Employees;
+import su.opencode.project.web.project.persistence.model.JobTitle;
 import su.opencode.project.web.project.persistence.services.EmployeesDataService;
 
 import java.text.SimpleDateFormat;
@@ -29,7 +30,7 @@ public class DemoController {
             @RequestParam("action") String action,
             @RequestParam("name") String name,
             @RequestParam("surname") String surname,
-            @RequestParam("id") Long id,
+            @RequestParam("jobTitle") JobTitle jobTitle,
             @RequestParam("salary") int salary,
             @RequestParam("birthDate") String birthDate,
             @RequestParam("department") String departmentName,
@@ -38,9 +39,10 @@ public class DemoController {
     ) {
         List<Employees> employees = new ArrayList<>();
         if ("delete".equals(action)) {
-            employeesDataService.deleteById(id);
+           // employeesDataService.deleteById(id);
         } else if ("save".equals(action)) {
             Employees newEmployees = new Employees("test", LocalDate.now());
+            newEmployees.setJobTitle(jobTitle);
             newEmployees.setName(name);
             newEmployees.setSalary(salary);
             newEmployees.setSurname(surname);

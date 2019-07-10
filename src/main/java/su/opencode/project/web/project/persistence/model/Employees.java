@@ -18,6 +18,9 @@ public class Employees implements Serializable {
     @Column(name = "ID", updatable = false, nullable = false)
     private Long id;
 
+    @Column(name = "JOB_TITLE", nullable = false)
+    private JobTitle jobTitle;
+
     @Column(name = "NAME", nullable = false)
     private String name;
 
@@ -133,6 +136,14 @@ public class Employees implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public JobTitle getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(JobTitle jobTitle) {
+        this.jobTitle = jobTitle;
     }
 
     @Override
