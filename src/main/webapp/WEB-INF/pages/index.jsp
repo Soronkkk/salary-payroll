@@ -29,7 +29,7 @@
 
     <script>
         $.noConflict();
-        jQuery(document).ready(function($){
+        jQuery(document).ready(function ($) {
             $(function () {
                 $("#table-id").tablesorter();
             });
@@ -52,23 +52,82 @@
 
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/crud" method="post">
-    <div>
-        <p><input type="radio" name="action" value="save">save</p>
-        <p><input type="radio" name="action" value="delete">delete</p>
-        <p><input type="radio" name="action" value="find">find</p>
-        <br>
+
+
+<form action="${pageContext.request.contextPath}/crud" method="post" class="needs-validation" novalidate>
+    <div class="form-row" style="text-align: center;">
+        <%--Id--%>
+        <div class="col-md-4 mb-3">
+            <label for="validationTooltip01">Id</label>
+            <input type="text" name="id" class="form-control" id="validationTooltip01" placeholder="Id" required>
+        </div>
+        <%--Name--%>
+        <div class="col-md-4 mb-3">
+            <label for="validationTooltip02">Name</label>
+            <input type="text" name="name" class="form-control" id="validationTooltip02" placeholder="Name" required>
+        </div>
+        <%--Surname--%>
+        <div class="col-md-4 mb-3">
+            <label for="validationTooltip03">Surname</label>
+            <input type="text" name="surname" class="form-control" id="validationTooltip03" placeholder="Surname"
+                   required>
+        </div>
+        <%--Salary--%>
+        <div class="col-md-4 mb-3">
+            <label for="validationTooltip04">Salary</label>
+            <input type="text" name="salary" class="form-control" id="validationTooltip04" placeholder="Salary"
+                   required>
+        </div>
+        <%--email--%>
+        <div class="col-md-4 mb-3">
+            <label for="validationTooltip05">Email</label>
+            <input type="text" name="email" class="form-control" id="validationTooltip05" placeholder="Email"
+                   required>
+        </div>
+        <%--Birth date--%>
+        <div class="col-md-4 mb-3">
+            <label for="birth-datepicker">Birth date</label>
+            <input type="text" name="birthDate" class="form-control" id="birth-datepicker" placeholder="Birth date"
+                   required>
+        </div>
+        <%--Department--%>
+        <div class="col-md-4 mb-3">
+            <label for="validationTooltip06">Department</label>
+            <input type="text" name="department" class="form-control" id="validationTooltip06" placeholder="Department"
+                   required>
+        </div>
+        <%--Last payroll date--%>
+        <div class="col-md-4 mb-3">
+            <label for="payroll-datepicker">Last payroll date</label>
+            <input type="text" name="lastPayrollDate" class="form-control" id="payroll-datepicker"
+                   placeholder="Last payroll date"
+                   required>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="radioLines" >Select an action</label>
+            <div id="radioLines">
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline1" name="action" value="save" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline1">Add employee</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline2" name="action" value="delete" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline2">Delete</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline3" name="action" value="find" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline3">Find</label>
+            </div>
+            </div>
+        </div>
     </div>
-    id:<input type="text" name="id"/><br>
-    name:<input type="text" name="name"/><br>
-    surname:<input type="text" name="surname"><br>
-    salary:<input type="text" name="salary"/><br>
-    email:<input type="text" name="email"><br>
-    birth date:<input type="text" id="birth-datepicker" name="birthDate"><br>
-    department:<input type="text" name="department"><br>
-    last payroll date<input type="text" id="payroll-datepicker" name="lastPayrollDate">
-    <input type="submit"/>
+    <div style="text-align: center;">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+
 </form>
+
+
 </br>
 <table id="table-id" class="table tablesorter table-hoover">
     <thead>
