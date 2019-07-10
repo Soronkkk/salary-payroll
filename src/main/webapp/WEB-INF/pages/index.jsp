@@ -36,7 +36,12 @@
     </div>
     id:<input type="text" name="id"/><br>
     name:<input type="text" name="name"/><br>
+    surname:<input type="text" name="surname"><br>
     salary:<input type="text" name="salary"/><br>
+    email:<input type="text" name="email"><br>
+    birth date:<input type="text" name="birthDate"><br>
+    department:<input type="text" name="department"><br>
+    last payroll date<input type="text" name="lastPayrollDate">
     <input type="submit"/>
 </form>
 </br>
@@ -45,7 +50,11 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>Surname</th>
             <th>Salary</th>
+            <th>Birth date</th>
+            <th>Department</th>
+            <th>Last payroll date</th>
         </tr>
         </thead>
         <tbody>
@@ -54,6 +63,10 @@
                 <td>id=${employees.id}</td>
                 <td>${employees.name}</td>
                 <td>${employees.salary}</td>
+                <td>${employees.birthDate}</td>
+                <td>${employees.departmentName}</td>
+                <td>${employees.lastPayrollDate}</td>
+
             </tr>
         </c:forEach>
         </tbody>

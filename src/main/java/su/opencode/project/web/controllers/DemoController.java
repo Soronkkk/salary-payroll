@@ -9,6 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 import su.opencode.project.web.project.persistence.model.Employees;
 import su.opencode.project.web.project.persistence.services.EmployeesDataService;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -25,16 +28,26 @@ public class DemoController {
     public ModelAndView crud(
             @RequestParam("action") String action,
             @RequestParam("name") String name,
+            @RequestParam("surname") String surname,
             @RequestParam("id") Long id,
-            @RequestParam("salary") int salary
+            @RequestParam("salary") int salary,
+            @RequestParam("birthDate") LocalDate birthDate,
+            @RequestParam("department") String departmentName,
+            @RequestParam("lastPayrollDate") LocalDate lastPayrollDate,
+            @RequestParam("email") String email
     ) {
         List<Employees> employees = new ArrayList<>();
         if ("delete".equals(action)) {
             employeesDataService.deleteById(id);
         } else if ("save".equals(action)) {
-            Employees newEmployees = new Employees("test", new Date());
+            Employees newEmployees = new Employees("test", LocalDate.now());
             newEmployees.setName(name);
             newEmployees.setSalary(salary);
+            newEmployees.setSurname(surname);
+            newEmployees.setBirthDate(birthDate);
+            newEmployees.setDepartmentName(departmentName);
+            newEmployees.setLastPayrollDate(lastPayrollDate);
+            newEmployees.setEmail(email);
             employeesDataService.save(newEmployees);
         } else if ("find".equals(action)) {
             Optional<Employees> optionalEmployees = employeesDataService.findByName(name);
