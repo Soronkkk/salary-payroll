@@ -36,18 +36,14 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(function () {
-            $("#birth-datepicker").datepicker({
-                dateFormat: "yy-mm-dd",
+            $("#payroll-datepicker").datepicker({
+                dateFormat: 'yy-mm-dd',
                 changeMonth: true,
                 changeYear: true,
                 yearRange: "-100:+0"
             });
-        });
-    </script>
-    <script>
-        $(function () {
-            $("#payroll-datepicker").datepicker({
-                dateFormat: 'yy-mm-dd',
+            $("#birth-datepicker").datepicker({
+                dateFormat: "yy-mm-dd",
                 changeMonth: true,
                 changeYear: true,
                 yearRange: "-100:+0"
@@ -58,95 +54,102 @@
 </head>
 <body>
 
+<div class="text-center">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employeeAddModal">
+        Add employee
+    </button>
+</div>
 
-<form autocomplete="off" action="${pageContext.request.contextPath}/crud" method="post" class="needs-validation"
-      novalidate>
-    <div class="form-row" style="text-align: center;">
-        <%--Job Title--%>
-        <div class="col-md-4 mb-3">
-            <label for="jobTitle">Job title</label>
-            <select name="jobTitle" id="jobTitle" class="form-control">
-                <option value="Программист">Программист</option>
-                <option value="Менеджер">Менеджер</option>
-                <option value="Дизайнер">Дизайнер</option>
-            </select>
-        </div>
-        <%--Name--%>
-        <div class="col-md-4 mb-3">
-            <label for="validationTooltip02">Name</label>
-            <input type="text" name="name" class="form-control" id="validationTooltip02" placeholder="Name" required>
-        </div>
-        <%--Surname--%>
-        <div class="col-md-4 mb-3">
-            <label for="validationTooltip03">Surname</label>
-            <input type="text" name="surname" class="form-control" id="validationTooltip03" placeholder="Surname"
-                   required>
-        </div>
-        <%--Salary--%>
-        <div class="col-md-4 mb-3">
-            <label for="validationTooltip04">Salary</label>
-            <input type="text" name="salary" class="form-control" id="validationTooltip04" placeholder="Salary"
-                   required>
-        </div>
-        <%--email--%>
-        <div class="col-md-4 mb-3">
-            <label for="validationTooltip05">Email</label>
-            <input type="text" name="email" class="form-control" id="validationTooltip05" placeholder="Email"
-                   required>
-        </div>
-        <%--Birth date--%>
-        <div class="col-md-4 mb-3">
-            <label for="birth-datepicker">Birth date</label>
-            <input type="text" name="birthDate" class="form-control" id="birth-datepicker" placeholder="Birth date"
-                   required>
-        </div>
-        <%--Department--%>
-        <div class="col-md-4 mb-3">
-            <label for="department">Department</label>
-            <select name="department" id="department" class="form-control">
-                <option value="Отдел кадров">Отдел кадров</option>
-                <option value="Отдел разработки">Отдел разработки</option>
-                <option value="Отдел проектировки">Отдел проектирования</option>
-            </select>
-        </div>
-        <%--Last payroll date--%>
-        <div class="col-md-4 mb-3">
-            <label for="payroll-datepicker">Last payroll date</label>
-            <input type="text" name="lastPayrollDate" class="form-control" id="payroll-datepicker"
-                   placeholder="Last payroll date"
-                   required>
-        </div>
-        <div class="col-md-4 mb-3">
-            <label for="radioLines">Select an action</label>
-            <div id="radioLines">
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline1" name="action" value="save" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadioInline1">Add employee</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline2" name="action" value="delete"
-                           class="custom-control-input">
-                    <label class="custom-control-label" for="customRadioInline2">Delete</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline3" name="action" value="find" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadioInline3">Find</label>
-                </div>
+<!-- Modal -->
+<div class="modal fade" id="employeeAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add employee</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form autocomplete="off" action="${pageContext.request.contextPath}/crud" method="post"
+                      class="needs-validation"
+                      novalidate>
+                    <div class="form-row" style="text-align: center;">
+                        <%--Job Title--%>
+                        <div class="col-md-4 mb-3">
+                            <label for="jobTitle">Job title</label>
+                            <select name="jobTitle" id="jobTitle" class="form-control">
+                                <option value="Программист">Программист</option>
+                                <option value="Менеджер">Менеджер</option>
+                                <option value="Дизайнер">Дизайнер</option>
+                            </select>
+                        </div>
+                        <%--Name--%>
+                        <div class="col-md-4 mb-3">
+                            <label for="validationTooltip02">Name</label>
+                            <input type="text" name="name" class="form-control" id="validationTooltip02"
+                                   placeholder="Name" required>
+                        </div>
+                        <%--Surname--%>
+                        <div class="col-md-4 mb-3">
+                            <label for="validationTooltip03">Surname</label>
+                            <input type="text" name="surname" class="form-control" id="validationTooltip03"
+                                   placeholder="Surname"
+                                   required>
+                        </div>
+                        <%--Salary--%>
+                        <div class="col-md-4 mb-3">
+                            <label for="validationTooltip04">Salary</label>
+                            <input type="text" name="salary" class="form-control" id="validationTooltip04"
+                                   placeholder="Salary"
+                                   required>
+                        </div>
+                        <%--email--%>
+                        <div class="col-md-4 mb-3">
+                            <label for="validationTooltip05">Email</label>
+                            <input type="text" name="email" class="form-control" id="validationTooltip05"
+                                   placeholder="Email"
+                                   required>
+                        </div>
+                        <%--Birth date--%>
+                        <div class="col-md-4 mb-3">
+                            <label for="birth-datepicker">Birth date</label>
+                            <input type="text" name="birthDate" class="form-control" id="birth-datepicker"
+                                   placeholder="Birth date"
+                                   required>
+                        </div>
+                        <%--Department--%>
+                        <div class="col-md-4 mb-3">
+                            <label for="department">Department</label>
+                            <select name="department" id="department" class="form-control">
+                                <option value="Отдел кадров">Отдел кадров</option>
+                                <option value="Отдел разработки">Отдел разработки</option>
+                                <option value="Отдел проектировки">Отдел проектирования</option>
+                            </select>
+                        </div>
+                        <%--Last payroll date--%>
+                        <div class="col-md-4 mb-3">
+                            <label for="payroll-datepicker">Last payroll date</label>
+                            <input type="text" name="lastPayrollDate" class="form-control" id="payroll-datepicker"
+                                   placeholder="Last payroll date"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit" name="action" value="save">Save changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    <div style="text-align: center;">
-        <button class="btn btn-primary" type="submit">Submit</button>
-    </div>
-
-</form>
-
+</div>
 
 </br>
 <table id="table-id" class="table table-striped table-bordered sortable" style="width:100%">
     <thead>
     <tr>
-        <th contenteditable="true">Job Title</th>
+        <th>Job Title</th>
         <th>Name</th>
         <th>Surname</th>
         <th>Email</th>
