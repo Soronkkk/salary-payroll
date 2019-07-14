@@ -210,6 +210,8 @@
         <th>Birth date</th>
         <th>Department</th>
         <th>Last payroll date</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -223,6 +225,8 @@
             <td>${employees.birthDate}</td>
             <td>${employees.departmentName}</td>
             <td>${employees.lastPayrollDate}</td>
+            <td><a href="<c:url value="/edit/${employees.id}"/>">Edit</a> </td>
+            <td><a href="<c:url value="/delete/${employees.id}"/>">Delete</a> </td>
         </tr>
     </c:forEach>
     </tbody>

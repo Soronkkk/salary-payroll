@@ -70,7 +70,7 @@ public class EmployeeController {
     public String delete(@PathVariable("id") long id) {
         this.employeesDataService.deleteById(id);
 
-        return "redirect:/index";
+        return "redirect:/crud";
     }
 
     @RequestMapping("/edit/{id}")
