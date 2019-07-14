@@ -34,4 +34,10 @@ public class EmployeesDataService {
         return employeesCrudRepository.findByName(name);
     }
 
+    @Transactional
+    public Optional<Employees> findById(long id){
+        return employeesCrudRepository.findById(id);
+    }
+
+
 }

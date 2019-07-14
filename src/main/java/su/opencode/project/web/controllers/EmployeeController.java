@@ -2,10 +2,8 @@ package su.opencode.project.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import su.opencode.project.web.project.persistence.model.Employees;
 import su.opencode.project.web.project.persistence.model.JobTitle;
@@ -28,7 +26,6 @@ public class EmployeeController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/crud")
     public ModelAndView crud(
-            @RequestParam("action") String action,
             @RequestParam("name") String name,
             @RequestParam("surname") String surname,
             @RequestParam("jobTitle") String jobTitle,
@@ -37,31 +34,51 @@ public class EmployeeController {
             @RequestParam("department") String departmentName,
             @RequestParam("lastPayrollDate") String lastPayrollDate,
             @RequestParam("email") String email
-    ) {
+    ){
         List<Employees> employees = new ArrayList<>();
-        if ("delete".equals(action)) {
-           // employeesDataService.deleteById(id);
-        } else if ("save".equals(action)) {
-            Employees newEmployees = new Employees("test", LocalDate.now());
-            newEmployees.setJobTitle(jobTitle);
-            newEmployees.setName(name);
-            newEmployees.setSalary(salary);
-            newEmployees.setSurname(surname);
-            newEmployees.setBirthDate(LocalDate.parse(birthDate));
-            newEmployees.setDepartmentName(departmentName);
-            newEmployees.setLastPayrollDate(LocalDate.parse(lastPayrollDate));
-            newEmployees.setEmail(email);
-            employeesDataService.save(newEmployees);
-        } else if ("find".equals(action)) {
-            Optional<Employees> optionalEmployees = employeesDataService.findByName(name);
-            optionalEmployees.ifPresent(employees::add);
-        }
-        if (!"find".equals(action)) {
-            employees.addAll((Collection<? extends Employees>) employeesDataService.findAll());
-        }
+        Employees newEmployees = new Employees("test", LocalDate.now());
+        newEmployees.setJobTitle(jobTitle);
+        newEmployees.setName(name);
+        newEmployees.setSalary(salary);
+        newEmployees.setSurname(surname);
+        newEmployees.setBirthDate(LocalDate.parse(birthDate));
+        newEmployees.setDepartmentName(departmentName);
+        newEmployees.setLastPayrollDate(LocalDate.parse(lastPayrollDate));
+        newEmployees.setEmail(email);
+        //List<Employees> employees = new ArrayList<>((Collection<? extends Employees>) employeesDataService.findAll());
+        employeesDataService.save(newEmployees);
+        employees.addAll((Collection<? extends Employees>) employeesDataService.findAll());
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("employees", employees);
         modelAndView.setViewName("index");
         return modelAndView;
     }
+
+
+
+
+//    @GetMapping
+//    public ModelAndView getEmployeePage(){
+//        List<Employees> employees = new ArrayList<>((Collection<? extends Employees>) employeesDataService.findAll());
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.addObject("employees", employees);
+//        modelAndView.setViewName("index");
+//        return modelAndView;
+//    }
+
+    @RequestMapping("/delete/{id}")
+    public String delete(@PathVariable("id") long id) {
+        this.employeesDataService.deleteById(id);
+
+        return "redirect:/index";
+    }
+
+    @RequestMapping("/edit/{id}")
+    public String update(@PathVariable("id") long id, Model model) {
+        model.addAttribute("employees", this.employeesDataService.findById(id));
+        model.addAttribute("listEmployees", this.employeesDataService.findAll());
+        return "redirect:/index";
+    }
+
+
 }
