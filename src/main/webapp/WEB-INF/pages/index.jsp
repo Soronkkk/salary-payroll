@@ -90,6 +90,12 @@
                             <label for="validationTooltip02">Name</label>
                             <input type="text" name="name" class="form-control" id="validationTooltip02"
                                    placeholder="Name" required>
+                            <div class="invalid-feedback">
+                                Please choose a name
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good
+                            </div>
                         </div>
                         <%--Surname--%>
                         <div class="col-md-4 mb-3">
@@ -97,13 +103,25 @@
                             <input type="text" name="surname" class="form-control" id="validationTooltip03"
                                    placeholder="Surname"
                                    required>
+                            <div class="invalid-feedback">
+                                Please choose a surname
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good
+                            </div>
                         </div>
                         <%--Salary--%>
                         <div class="col-md-4 mb-3">
                             <label for="validationTooltip04">Salary</label>
-                            <input type="text" name="salary" class="form-control" id="validationTooltip04"
+                            <input type="number" name="salary" class="form-control" id="validationTooltip04"
                                    placeholder="Salary"
                                    required>
+                            <div class="invalid-feedback">
+                                Please choose a salary
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good
+                            </div>
                         </div>
                         <%--email--%>
                         <div class="col-md-4 mb-3">
@@ -111,6 +129,12 @@
                             <input type="text" name="email" class="form-control" id="validationTooltip05"
                                    placeholder="Email"
                                    required>
+                            <div class="invalid-feedback">
+                                Please choose a email
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good
+                            </div>
                         </div>
                         <%--Birth date--%>
                         <div class="col-md-4 mb-3">
@@ -118,6 +142,12 @@
                             <input type="text" name="birthDate" class="form-control" id="birth-datepicker"
                                    placeholder="Birth date"
                                    required>
+                            <div class="invalid-feedback">
+                                Please choose a dirth date
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good
+                            </div>
                         </div>
                         <%--Department--%>
                         <div class="col-md-4 mb-3">
@@ -134,12 +164,35 @@
                             <input type="text" name="lastPayrollDate" class="form-control" id="payroll-datepicker"
                                    placeholder="Last payroll date"
                                    required>
+                            <div class="invalid-feedback">
+                                Please choose a last payroll date
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-primary" type="submit" name="action" value="save">Save changes</button>
                     </div>
                 </form>
+                <script>
+                    (function () {
+                        'use strict';
+                        window.addEventListener('load', function () {
+                            var forms = document.getElementsByClassName('needs-validation');
+                            var validation = Array.prototype.filter.call(forms, function (form) {
+                                form.addEventListener('submit', function (event) {
+                                    if (form.checkValidity()===false){
+                                        event.preventDefault();
+                                        event.stopPropagation();
+                                    }
+                                    form.classList.add('was-validated');
+                                }, false);
+                            });
+                        }, false);
+                    })();
+                </script>
             </div>
         </div>
     </div>

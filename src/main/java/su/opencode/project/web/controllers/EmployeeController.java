@@ -34,7 +34,8 @@ public class EmployeeController {
             @RequestParam("department") String departmentName,
             @RequestParam("lastPayrollDate") String lastPayrollDate,
             @RequestParam("email") String email
-    ){
+    ) {
+
         List<Employees> employees = new ArrayList<>();
         Employees newEmployees = new Employees("test", LocalDate.now());
         newEmployees.setJobTitle(jobTitle);
@@ -52,9 +53,8 @@ public class EmployeeController {
         modelAndView.addObject("employees", employees);
         modelAndView.setViewName("index");
         return modelAndView;
+
     }
-
-
 
 
 //    @GetMapping
