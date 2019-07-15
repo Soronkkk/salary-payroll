@@ -28,7 +28,7 @@ public class Employees extends CreatedInfo implements Serializable {
     private LocalDate birthDate;
 
     @Column(name="SALARY", nullable = false)
-    private int Salary;
+    private int salary;
 
     @Column(name="DEPARTMENT_NAME", nullable = false)
     private String departmentName;
@@ -64,11 +64,11 @@ public class Employees extends CreatedInfo implements Serializable {
 
 
     public int getSalary() {
-        return Salary;
+        return salary;
     }
 
     public void setSalary(int salary) {
-        Salary = salary;
+        this.salary = salary;
     }
 
     public String getSurname() {
@@ -124,7 +124,7 @@ public class Employees extends CreatedInfo implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employees employees = (Employees) o;
-        return Salary == employees.Salary &&
+        return salary == employees.salary &&
                 Objects.equals(id, employees.id) &&
                 Objects.equals(jobTitle, employees.jobTitle) &&
                 Objects.equals(name, employees.name) &&
@@ -137,7 +137,7 @@ public class Employees extends CreatedInfo implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, jobTitle, name, surname, birthDate, Salary, departmentName, lastPayrollDate, email);
+        return Objects.hash(id, jobTitle, name, surname, birthDate, salary, departmentName, lastPayrollDate, email);
     }
 
     @Override
@@ -148,7 +148,7 @@ public class Employees extends CreatedInfo implements Serializable {
         sb.append(", name='").append(name).append('\'');
         sb.append(", surname='").append(surname).append('\'');
         sb.append(", birthDate=").append(birthDate);
-        sb.append(", Salary=").append(Salary);
+        sb.append(", salary=").append(salary);
         sb.append(", departmentName='").append(departmentName).append('\'');
         sb.append(", lastPayrollDate=").append(lastPayrollDate);
         sb.append(", email='").append(email).append('\'');

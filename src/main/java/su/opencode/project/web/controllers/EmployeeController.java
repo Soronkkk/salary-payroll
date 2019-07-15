@@ -36,7 +36,6 @@ public class EmployeeController {
             @RequestParam("email") String email
     ) {
 
-
         Employees newEmployees = new Employees("test", LocalDate.now());
         newEmployees.setJobTitle(jobTitle);
         newEmployees.setName(name);
@@ -67,10 +66,12 @@ public class EmployeeController {
     }
 
     @RequestMapping("/edit/{id}")
-    public String update(@PathVariable("id") long id, Model model) {
+    public ModelAndView update(@PathVariable("id") long id, Model model) {
         model.addAttribute("employees", this.employeesDataService.findById(id));
-        model.addAttribute("listEmployees", this.employeesDataService.findAll());
-        return "redirect:/index";
+
+
+       // model.addAttribute("listEmployees", this.employeesDataService.findAll());
+        return getEmployeePage();
     }
 
 

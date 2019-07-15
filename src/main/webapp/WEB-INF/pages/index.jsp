@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="https://drvic10k.github.io/bootstrap-sortable/Contents/bootstrap-sortable.css"/>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -143,7 +143,7 @@
                                    placeholder="Birth date"
                                    required>
                             <div class="invalid-feedback">
-                                Please choose a dirth date
+                                Please choose a birth date
                             </div>
                             <div class="valid-feedback">
                                 Looks good
@@ -193,6 +193,7 @@
                         }, false);
                     })();
                 </script>
+
             </div>
         </div>
     </div>
@@ -202,29 +203,94 @@
 <table id="table-id" class="table table-striped table-bordered sortable" style="width:100%">
     <thead>
     <tr>
+        <th>id</th>
         <th>Job Title</th>
         <th>Name</th>
         <th>Surname</th>
-        <th>Email</th>
-        <th>Salary</th>
         <th>Birth date</th>
+        <th>Salary</th>
         <th>Department</th>
         <th>Last payroll date</th>
+        <th>Email</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
     </thead>
+    <script>
+        var uncalledEmpClass = "table-secondary";
+        function displayEmployees(selectE) {
+            $.ajax({
+                type: "POST",
+                url: "/crud",
+                data: {
+                    "employee": selectE.value
+                },
+                success: function(data) {
+                    printEmployees(data);
+                }
+            });
+        }
+        function printEmployees(employees) {
+            var tbody = document.getElementById("tbodyId");
+            tbody.innerHTML = "";
+            for(var i in employees) {
+                var row = document.createElement('tr');
+                row.id = "employee-" + employees[i].id;
+                row.classList.add(uncalledEmpClass);
+
+                // Employee name column
+                var cell = document.createElement('td');
+                cell.innerHTML = employees[i].jobTitle;
+                row.appendChild(cell);
+                // Employee position name column
+                cell = document.createElement('td');
+                cell.innerHTML = employees[i].name;
+                row.appendChild(cell);
+                // Employee salary column
+                cell = document.createElement('td');
+                cell.innerHTML = employees[i].surname;
+                row.appendChild(cell);
+
+                cell = document.createElement('td');
+                cell.innerHTML = employees[i].birthDate;
+                row.appendChild(cell);
+
+                cell = document.createElement('td');
+                cell.innerHTML = employees[i].salary;
+                row.appendChild(cell);
+
+                cell = document.createElement('td');
+                cell.innerHTML = employees[i].department;
+                row.appendChild(cell);
+
+                cell = document.createElement('td');
+                cell.innerHTML = employees[i].lastPayrollDate;
+                row.appendChild(cell);
+
+                cell = document.createElement('td');
+                cell.innerHTML = employees[i].email;
+                row.appendChild(cell);
+                
+                // Добавить строку в таблицу
+                tbody.appendChild(row);
+            }
+        }
+
+        function xxx(employees) {
+        }
+    </script>
     <tbody>
     <c:forEach items="${employees}" var="employees">
         <tr>
+            <td>${employees.id}</td>
             <td>${employees.jobTitle}</td>
             <td>${employees.name}</td>
             <td>${employees.surname}</td>
-            <td>${employees.email}</td>
-            <td>${employees.salary}</td>
             <td>${employees.birthDate}</td>
+            <td>${employees.salary}</td>
             <td>${employees.departmentName}</td>
             <td>${employees.lastPayrollDate}</td>
+            <td>${employees.email}</td>
             <td><a href="<c:url value="/edit/${employees.id}"/>">Edit</a> </td>
             <td><a href="<c:url value="/delete/${employees.id}"/>">Delete</a> </td>
         </tr>
