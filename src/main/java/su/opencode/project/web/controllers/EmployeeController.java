@@ -36,7 +36,7 @@ public class EmployeeController {
             @RequestParam("email") String email
     ) {
 
-        List<Employees> employees = new ArrayList<>();
+
         Employees newEmployees = new Employees("test", LocalDate.now());
         newEmployees.setJobTitle(jobTitle);
         newEmployees.setName(name);
@@ -46,31 +46,24 @@ public class EmployeeController {
         newEmployees.setDepartmentName(departmentName);
         newEmployees.setLastPayrollDate(LocalDate.parse(lastPayrollDate));
         newEmployees.setEmail(email);
-        //List<Employees> employees = new ArrayList<>((Collection<? extends Employees>) employeesDataService.findAll());
         employeesDataService.save(newEmployees);
-        employees.addAll((Collection<? extends Employees>) employeesDataService.findAll());
+        return getEmployeePage();
+    }
+
+
+    @GetMapping
+    public ModelAndView getEmployeePage(){
+        List<Employees> employees = new ArrayList<>((Collection<? extends Employees>) employeesDataService.findAll());
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("employees", employees);
         modelAndView.setViewName("index");
         return modelAndView;
-
     }
 
-
-//    @GetMapping
-//    public ModelAndView getEmployeePage(){
-//        List<Employees> employees = new ArrayList<>((Collection<? extends Employees>) employeesDataService.findAll());
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("employees", employees);
-//        modelAndView.setViewName("index");
-//        return modelAndView;
-//    }
-
     @RequestMapping("/delete/{id}")
-    public String delete(@PathVariable("id") long id) {
+    public ModelAndView delete(@PathVariable("id") long id) {
         this.employeesDataService.deleteById(id);
-
-        return "redirect:/crud";
+        return getEmployeePage();
     }
 
     @RequestMapping("/edit/{id}")

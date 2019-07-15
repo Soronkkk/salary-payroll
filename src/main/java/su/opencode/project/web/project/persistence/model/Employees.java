@@ -3,7 +3,6 @@ package su.opencode.project.web.project.persistence.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
 
@@ -26,9 +25,8 @@ public class Employees extends CreatedInfo implements Serializable {
     private String surname;
 
     @Column(name = "BIRTH_DATE", nullable = false)
-    //@Temporal(value = TemporalType.TIMESTAMP)
     private LocalDate birthDate;
-    
+
     @Column(name="SALARY", nullable = false)
     private int Salary;
 
