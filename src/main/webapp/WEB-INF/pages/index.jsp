@@ -88,7 +88,7 @@
                         <%--Name--%>
                         <div class="col-md-4 mb-3">
                             <label for="name">Name</label>
-                            <input type="text" name="name" class="form-control" id="name"
+                            <input type="text" name="name" pattern="^[a-zA-Z]+$" class="form-control" id="name"
                                    placeholder="Name" required>
                             <div class="invalid-feedback">
                                 Please choose a name
@@ -100,7 +100,7 @@
                         <%--Surname--%>
                         <div class="col-md-4 mb-3">
                             <label for="surname">Surname</label>
-                            <input type="text" name="surname" class="form-control" id="surname"
+                            <input type="text" name="surname" pattern="^[a-zA-Z]+$" class="form-control" id="surname"
                                    placeholder="Surname"
                                    required>
                             <div class="invalid-feedback">
@@ -113,7 +113,7 @@
                         <%--Salary--%>
                         <div class="col-md-4 mb-3">
                             <label for="salary">Salary</label>
-                            <input type="number" name="salary" class="form-control" id="salary"
+                            <input type="number" name="salary" pattern="^[0-9]*$" class="form-control" id="salary"
                                    placeholder="Salary"
                                    required>
                             <div class="invalid-feedback">
@@ -126,7 +126,7 @@
                         <%--email--%>
                         <div class="col-md-4 mb-3">
                             <label for="email">Email</label>
-                            <input type="text" name="email" class="form-control" id="email"
+                            <input type="text" name="email" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" class="form-control" id="email"
                                    placeholder="Email"
                                    required>
                             <div class="invalid-feedback">
@@ -139,7 +139,8 @@
                         <%--Birth date--%>
                         <div class="col-md-4 mb-3">
                             <label for="birth-datepicker">Birth date</label>
-                            <input type="text" name="birthDate" class="form-control" id="birth-datepicker"
+                            <input type="text" name="birthDate" pattern="^\s*((?:19|20)\d{2})\-(1[012]|0?[1-9])\-(3[01]|[12][0-9]|0?[1-9])\s*$"
+                                   class="form-control" id="birth-datepicker"
                                    placeholder="Birth date"
                                    required>
                             <div class="invalid-feedback">
@@ -161,7 +162,8 @@
                         <%--Last payroll date--%>
                         <div class="col-md-4 mb-3">
                             <label for="payroll-datepicker">Last payroll date</label>
-                            <input type="text" name="lastPayrollDate" class="form-control" id="payroll-datepicker"
+                            <input type="text" name="lastPayrollDate" pattern="^\s*((?:19|20)\d{2})\-(1[012]|0?[1-9])\-(3[01]|[12][0-9]|0?[1-9])\s*$"
+                                   class="form-control" id="payroll-datepicker"
                                    placeholder="Last payroll date"
                                    required>
                             <div class="invalid-feedback">
@@ -253,7 +255,7 @@
                 "email" : document.getElementById("email").value
             },
             success: function(data) {
-                if(id != "")
+                if(id !== "")
                     editableRow.remove();
                 printEmployee(data);
                 // Скрыть модальное окно
@@ -323,7 +325,6 @@
         cell.appendChild(button);
         row.appendChild(cell);
 
-        // Добавить строку в таблицу
         document.getElementById("tbodyId").appendChild(row);
     }
 
