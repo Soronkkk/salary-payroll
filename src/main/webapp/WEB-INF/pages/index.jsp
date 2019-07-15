@@ -80,9 +80,9 @@
                         <div class="col-md-4 mb-3">
                             <label for="jobTitle">Job title</label>
                             <select name="jobTitle" id="jobTitle" class="form-control">
-                                <option value="Программист">Программист</option>
-                                <option value="Менеджер">Менеджер</option>
-                                <option value="Дизайнер">Дизайнер</option>
+                                <option value="Developer">Developer</option>
+                                <option value="Project manager">Project manager</option>
+                                <option value="Designer">Designer</option>
                             </select>
                         </div>
                         <%--Name--%>
@@ -153,9 +153,9 @@
                         <div class="col-md-4 mb-3">
                             <label for="department">Department</label>
                             <select name="department" id="department" class="form-control">
-                                <option value="Отдел кадров">Отдел кадров</option>
-                                <option value="Отдел разработки">Отдел разработки</option>
-                                <option value="Отдел проектировки">Отдел проектирования</option>
+                                <option value="Personnel department">Personnel department</option>
+                                <option value="Development department">Development department</option>
+                                <option value="Design department">Design department</option>
                             </select>
                         </div>
                         <%--Last payroll date--%>

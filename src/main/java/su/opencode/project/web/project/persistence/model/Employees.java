@@ -6,12 +6,10 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
-/**
- * Created by popov on 12.10.18.
- */
+
 @Entity
 @Table(name = "EMPLOYEES")
-public class Employees implements Serializable {
+public class Employees extends CreatedInfo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,14 +28,7 @@ public class Employees implements Serializable {
     @Column(name = "BIRTH_DATE", nullable = false)
     //@Temporal(value = TemporalType.TIMESTAMP)
     private LocalDate birthDate;
-
-    @Column(name = "CREATED_BY", nullable = false)
-    private String createdBy;
-
-    @Column(name = "CREATED_WHEN", nullable = false)
-    //@Temporal(value = TemporalType.TIMESTAMP)
-    private LocalDate createdWhen;
-
+    
     @Column(name="SALARY", nullable = false)
     private int Salary;
 
@@ -54,8 +45,7 @@ public class Employees implements Serializable {
     }
 
     public Employees(String createdBy, LocalDate createdWhen) {
-        this.createdBy = createdBy;
-        this.createdWhen = createdWhen;
+        super(createdBy, createdWhen);
     }
 
     public Long getId() {
@@ -74,21 +64,6 @@ public class Employees implements Serializable {
         this.name = name;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDate getCreatedWhen() {
-        return createdWhen;
-    }
-
-    public void setCreatedWhen(LocalDate createdWhen) {
-        this.createdWhen = createdWhen;
-    }
 
     public int getSalary() {
         return Salary;
@@ -153,32 +128,32 @@ public class Employees implements Serializable {
         Employees employees = (Employees) o;
         return Salary == employees.Salary &&
                 Objects.equals(id, employees.id) &&
+                Objects.equals(jobTitle, employees.jobTitle) &&
                 Objects.equals(name, employees.name) &&
                 Objects.equals(surname, employees.surname) &&
                 Objects.equals(birthDate, employees.birthDate) &&
-                Objects.equals(createdBy, employees.createdBy) &&
-                Objects.equals(createdWhen, employees.createdWhen) &&
                 Objects.equals(departmentName, employees.departmentName) &&
-                Objects.equals(lastPayrollDate, employees.lastPayrollDate);
+                Objects.equals(lastPayrollDate, employees.lastPayrollDate) &&
+                Objects.equals(email, employees.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, birthDate, createdBy, createdWhen, Salary, departmentName, lastPayrollDate);
+        return Objects.hash(id, jobTitle, name, surname, birthDate, Salary, departmentName, lastPayrollDate, email);
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Employees{");
         sb.append("id=").append(id);
+        sb.append(", jobTitle='").append(jobTitle).append('\'');
         sb.append(", name='").append(name).append('\'');
         sb.append(", surname='").append(surname).append('\'');
         sb.append(", birthDate=").append(birthDate);
-        sb.append(", createdBy='").append(createdBy).append('\'');
-        sb.append(", createdWhen=").append(createdWhen);
         sb.append(", Salary=").append(Salary);
         sb.append(", departmentName='").append(departmentName).append('\'');
         sb.append(", lastPayrollDate=").append(lastPayrollDate);
+        sb.append(", email='").append(email).append('\'');
         sb.append('}');
         return sb.toString();
     }

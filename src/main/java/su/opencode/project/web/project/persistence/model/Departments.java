@@ -2,11 +2,12 @@ package su.opencode.project.web.project.persistence.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
 @Table(name = "DEPARTMENTS")
-public class Departments implements Serializable {
+public class Departments extends CreatedInfo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,7 +17,9 @@ public class Departments implements Serializable {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    public Departments() {
+
+    public Departments(String createdBy, LocalDate createdWhen) {
+        super(createdBy, createdWhen);
     }
 
     public Long getId() {
