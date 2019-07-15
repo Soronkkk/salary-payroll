@@ -12,16 +12,16 @@ public class IndexController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/pages/index")
     public String index() {
-        return "index";
+        return "redirect:/employees";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/index")
     public String dummy() {
-        return "redirect:/pages/index";
+        return "redirect:/employees";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public String empty() {
-        return "index.html";
+        return "redirect:/employees";
     }
 }

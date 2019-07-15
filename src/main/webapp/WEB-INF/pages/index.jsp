@@ -33,7 +33,6 @@
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(function () {
@@ -55,7 +54,7 @@
 <body>
 
 <div class="text-center">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employeeAddModal">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employeeAddModal" onclick="clearModal()">
         Add employee
     </button>
 </div>
@@ -72,9 +71,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form autocomplete="off" action="${pageContext.request.contextPath}/crud" method="post"
+                <form autocomplete="off" method="post" onsubmit="return false;"
                       class="needs-validation"
                       novalidate>
+                    <input id="id" name="id" type="hidden">
                     <div class="form-row" style="text-align: center;">
                         <%--Job Title--%>
                         <div class="col-md-4 mb-3">
@@ -87,8 +87,8 @@
                         </div>
                         <%--Name--%>
                         <div class="col-md-4 mb-3">
-                            <label for="validationTooltip02">Name</label>
-                            <input type="text" name="name" class="form-control" id="validationTooltip02"
+                            <label for="name">Name</label>
+                            <input type="text" name="name" class="form-control" id="name"
                                    placeholder="Name" required>
                             <div class="invalid-feedback">
                                 Please choose a name
@@ -99,8 +99,8 @@
                         </div>
                         <%--Surname--%>
                         <div class="col-md-4 mb-3">
-                            <label for="validationTooltip03">Surname</label>
-                            <input type="text" name="surname" class="form-control" id="validationTooltip03"
+                            <label for="surname">Surname</label>
+                            <input type="text" name="surname" class="form-control" id="surname"
                                    placeholder="Surname"
                                    required>
                             <div class="invalid-feedback">
@@ -112,8 +112,8 @@
                         </div>
                         <%--Salary--%>
                         <div class="col-md-4 mb-3">
-                            <label for="validationTooltip04">Salary</label>
-                            <input type="number" name="salary" class="form-control" id="validationTooltip04"
+                            <label for="salary">Salary</label>
+                            <input type="number" name="salary" class="form-control" id="salary"
                                    placeholder="Salary"
                                    required>
                             <div class="invalid-feedback">
@@ -125,8 +125,8 @@
                         </div>
                         <%--email--%>
                         <div class="col-md-4 mb-3">
-                            <label for="validationTooltip05">Email</label>
-                            <input type="text" name="email" class="form-control" id="validationTooltip05"
+                            <label for="email">Email</label>
+                            <input type="text" name="email" class="form-control" id="email"
                                    placeholder="Email"
                                    required>
                             <div class="invalid-feedback">
@@ -173,9 +173,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit" name="action" value="save">Save changes</button>
+                        <button class="btn btn-primary" type="submit" name="action" value="save" onclick="saveEmployee()">Save changes</button>
                     </div>
-                </form>
                 <script>
                     (function () {
                         'use strict';
@@ -193,7 +192,7 @@
                         }, false);
                     })();
                 </script>
-
+                </form>
             </div>
         </div>
     </div>
@@ -216,70 +215,7 @@
         <th>Delete</th>
     </tr>
     </thead>
-    <script>
-        var uncalledEmpClass = "table-secondary";
-        function displayEmployees(selectE) {
-            $.ajax({
-                type: "POST",
-                url: "/crud",
-                data: {
-                    "employee": selectE.value
-                },
-                success: function(data) {
-                    printEmployees(data);
-                }
-            });
-        }
-        function printEmployees(employees) {
-            var tbody = document.getElementById("tbodyId");
-            tbody.innerHTML = "";
-            for(var i in employees) {
-                var row = document.createElement('tr');
-                row.id = "employee-" + employees[i].id;
-                row.classList.add(uncalledEmpClass);
-
-                // Employee name column
-                var cell = document.createElement('td');
-                cell.innerHTML = employees[i].jobTitle;
-                row.appendChild(cell);
-                // Employee position name column
-                cell = document.createElement('td');
-                cell.innerHTML = employees[i].name;
-                row.appendChild(cell);
-                // Employee salary column
-                cell = document.createElement('td');
-                cell.innerHTML = employees[i].surname;
-                row.appendChild(cell);
-
-                cell = document.createElement('td');
-                cell.innerHTML = employees[i].birthDate;
-                row.appendChild(cell);
-
-                cell = document.createElement('td');
-                cell.innerHTML = employees[i].salary;
-                row.appendChild(cell);
-
-                cell = document.createElement('td');
-                cell.innerHTML = employees[i].department;
-                row.appendChild(cell);
-
-                cell = document.createElement('td');
-                cell.innerHTML = employees[i].lastPayrollDate;
-                row.appendChild(cell);
-
-                cell = document.createElement('td');
-                cell.innerHTML = employees[i].email;
-                row.appendChild(cell);
-                
-                // Добавить строку в таблицу
-                tbody.appendChild(row);
-            }
-        }
-
-        function xxx(employees) {
-        }
-    </script>
-    <tbody>
+    <tbody id="tbodyId">
     <c:forEach items="${employees}" var="employees">
         <tr>
             <td>${employees.id}</td>
@@ -297,5 +233,139 @@
     </c:forEach>
     </tbody>
 </table>
+<script>
+    var editableRow;
+
+    function saveEmployee() {
+        var id = document.getElementById("id").value;
+        $.ajax({
+            type: "POST",
+            url: "${pageContext.request.contextPath}/employees/crud",
+            data: {
+                "id" : id,
+                "name" : document.getElementById("name").value,
+                "surname" : document.getElementById("surname").value,
+                "jobTitle" : document.getElementById("jobTitle").value,
+                "salary" : document.getElementById("salary").value,
+                "birthDate" : document.getElementById("birth-datepicker").value,
+                "department" : document.getElementById("department").value,
+                "lastPayrollDate" : document.getElementById("payroll-datepicker").value,
+                "email" : document.getElementById("email").value
+            },
+            success: function(data) {
+                if(id != "")
+                    editableRow.remove();
+                printEmployee(data);
+                // Скрыть модальное окно
+                $("#employeeAddModal").modal("hide");
+            }
+        });
+    }
+
+    function printEmployee(employee) {
+        var row = document.createElement('tr');
+
+        // Employee id column
+        var cell = document.createElement('td');
+        cell.innerHTML = employee.id;
+        row.appendChild(cell);
+
+        // Employee name column
+        cell = document.createElement('td');
+        cell.innerHTML = employee.jobTitle;
+        row.appendChild(cell);
+
+        // Employee position name column
+        cell = document.createElement('td');
+        cell.innerHTML = employee.name;
+        row.appendChild(cell);
+
+        // Employee salary column
+        cell = document.createElement('td');
+        cell.innerHTML = employee.surname;
+        row.appendChild(cell);
+
+        cell = document.createElement('td');
+        cell.innerHTML = employee.birthDate;
+        row.appendChild(cell);
+
+        cell = document.createElement('td');
+        cell.innerHTML = employee.salary;
+        row.appendChild(cell);
+
+        cell = document.createElement('td');
+        cell.innerHTML = employee.departmentName;
+        row.appendChild(cell);
+
+        cell = document.createElement('td');
+        cell.innerHTML = employee.lastPayrollDate;
+        row.appendChild(cell);
+
+        cell = document.createElement('td');
+        cell.innerHTML = employee.email;
+        row.appendChild(cell);
+
+        cell = document.createElement('td');
+        var button = document.createElement('button');
+        button.classList.add("btn");
+        button.classList.add("btn-link");
+        button.setAttribute('onclick', "editEmployee(this.parentNode.parentNode);");
+        button.innerText = "Edit";
+        cell.appendChild(button);
+        row.appendChild(cell);
+
+        cell = document.createElement('td');
+        button = document.createElement('button');
+        button.classList.add("btn");
+        button.classList.add("btn-link");
+        button.setAttribute('onclick', "deleteEmployee(this.parentNode.parentNode);");
+        button.innerText = "Delete";
+        cell.appendChild(button);
+        row.appendChild(cell);
+
+        // Добавить строку в таблицу
+        document.getElementById("tbodyId").appendChild(row);
+    }
+
+    function editEmployee(row) {
+        editableRow = row;
+        fillModal(row);
+        $("#employeeAddModal").modal("show");
+    }
+
+    function deleteEmployee(row) {
+        $.ajax({
+            type: "POST",
+            url: "${pageContext.request.contextPath}/employees/delete/" + row.children[0].innerText,
+            success: function(data) {
+                row.remove();
+            }
+        });
+    }
+
+    function fillModal(row) {
+        document.getElementById('id').value = row.children[0].innerText;
+        document.getElementById('jobTitle').value = row.children[1].innerText;
+        document.getElementById('name').value = row.children[2].innerText;
+        document.getElementById('surname').value = row.children[3].innerText;
+        document.getElementById('birth-datepicker').value = row.children[4].innerText;
+        document.getElementById('salary').value = row.children[5].innerText;
+        document.getElementById('department').value = row.children[6].innerText;
+        document.getElementById('payroll-datepicker').value = row.children[7].innerText;
+        document.getElementById('email').value = row.children[8].innerText;
+    }
+
+    function clearModal() {
+        document.getElementById('id').value = "";
+        document.getElementById('name').value = "";
+        document.getElementById('surname').value = "";
+        document.getElementById('birth-datepicker').value = "";
+        document.getElementById('salary').value = 0;
+        document.getElementById('payroll-datepicker').value = "";
+        document.getElementById('email').value = "";
+        document.getElementById('jobTitle').children[0].selected = true;
+        document.getElementById('department').children[0].selected = true;
+    }
+</script>
 </body>
 </html>

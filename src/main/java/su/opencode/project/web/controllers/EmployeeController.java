@@ -19,13 +19,16 @@ import java.util.*;
  */
 
 @Controller
+@RequestMapping("/employees")
 public class EmployeeController {
 
     @Autowired
     EmployeesDataService employeesDataService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/crud")
-    public ModelAndView crud(
+    @PostMapping(value = "/crud", produces = "application/json")
+    @ResponseBody
+    public Employees crud(
+            @RequestParam("id") Long id,
             @RequestParam("name") String name,
             @RequestParam("surname") String surname,
             @RequestParam("jobTitle") String jobTitle,
@@ -37,6 +40,7 @@ public class EmployeeController {
     ) {
 
         Employees newEmployees = new Employees("test", LocalDate.now());
+        newEmployees.setId(id);
         newEmployees.setJobTitle(jobTitle);
         newEmployees.setName(name);
         newEmployees.setSalary(salary);
@@ -45,24 +49,26 @@ public class EmployeeController {
         newEmployees.setDepartmentName(departmentName);
         newEmployees.setLastPayrollDate(LocalDate.parse(lastPayrollDate));
         newEmployees.setEmail(email);
-        employeesDataService.save(newEmployees);
-        return getEmployeePage();
+
+        return employeesDataService.save(newEmployees);
     }
 
 
     @GetMapping
     public ModelAndView getEmployeePage(){
         List<Employees> employees = new ArrayList<>((Collection<? extends Employees>) employeesDataService.findAll());
+        //System.out.println(Arrays.toString(employees.toArray()));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("employees", employees);
         modelAndView.setViewName("index");
         return modelAndView;
     }
 
-    @RequestMapping("/delete/{id}")
-    public ModelAndView delete(@PathVariable("id") long id) {
+    @PostMapping("/delete/{id}")
+    @ResponseBody
+    public Boolean delete(@PathVariable("id") long id) {
         this.employeesDataService.deleteById(id);
-        return getEmployeePage();
+        return true;
     }
 
     @RequestMapping("/edit/{id}")
