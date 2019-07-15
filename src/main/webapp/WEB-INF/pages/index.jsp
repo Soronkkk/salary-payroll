@@ -227,8 +227,8 @@
             <td>${employees.departmentName}</td>
             <td>${employees.lastPayrollDate}</td>
             <td>${employees.email}</td>
-            <td><a href="<c:url value="/edit/${employees.id}"/>">Edit</a> </td>
-            <td><a href="<c:url value="/delete/${employees.id}"/>">Delete</a> </td>
+            <td><button class="btn btn-link" onclick="editEmployee(this.parentNode.parentNode)">Edit</button> </td>
+            <td><button class="btn btn-link" onclick="deleteEmployee(this.parentNode.parentNode)">Delete</button></td>
         </tr>
     </c:forEach>
     </tbody>
