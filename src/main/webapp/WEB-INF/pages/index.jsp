@@ -30,7 +30,6 @@
     <script src="https://drvic10k.github.io/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
 
 
-
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -54,7 +53,8 @@
 <body>
 
 <div class="text-center">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employeeAddModal" onclick="clearModal()">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employeeAddModal"
+            onclick="clearModal()">
         Add employee
     </button>
 </div>
@@ -72,8 +72,7 @@
             </div>
             <div class="modal-body">
                 <form autocomplete="off" id="addForm" method="post" onsubmit="return false;"
-                      class="needs-validation"
-                      novalidate>
+                      class="needs-validation">
                     <input id="id" name="id" type="hidden">
                     <div class="form-row" style="text-align: center;">
                         <%--Job Title--%>
@@ -126,7 +125,8 @@
                         <%--email--%>
                         <div class="col-md-4 mb-3">
                             <label for="email">Email</label>
-                            <input type="text" name="email" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" class="form-control" id="email"
+                            <input type="text" name="email" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" class="form-control"
+                                   id="email"
                                    placeholder="Email"
                                    required>
                             <div class="invalid-feedback">
@@ -139,7 +139,8 @@
                         <%--Birth date--%>
                         <div class="col-md-4 mb-3">
                             <label for="birth-datepicker">Birth date</label>
-                            <input type="text" name="birthDate" pattern="^\s*((?:19|20)\d{2})\-(1[012]|0?[1-9])\-(3[01]|[12][0-9]|0?[1-9])\s*$"
+                            <input type="text" name="birthDate"
+                                   pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
                                    class="form-control" id="birth-datepicker"
                                    placeholder="Birth date"
                                    required>
@@ -162,7 +163,8 @@
                         <%--Last payroll date--%>
                         <div class="col-md-4 mb-3">
                             <label for="payroll-datepicker">Last payroll date</label>
-                            <input type="text" name="lastPayrollDate" pattern="^\s*((?:19|20)\d{2})\-(1[012]|0?[1-9])\-(3[01]|[12][0-9]|0?[1-9])\s*$"
+                            <input type="text" name="lastPayrollDate"
+                                   pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
                                    class="form-control" id="payroll-datepicker"
                                    placeholder="Last payroll date"
                                    required>
@@ -175,25 +177,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit" name="action" value="save" onclick="saveEmployee()">Save changes</button>
+                        <button class="btn btn-primary" type="submit" name="action" value="save"
+                                onclick="saveEmployee()">Save changes
+                        </button>
                     </div>
-                <script>
-                    (function () {
-                        'use strict';
-                        window.addEventListener('load', function () {
-                            var forms = document.getElementsByClassName('needs-validation');
-                            var validation = Array.prototype.filter.call(forms, function (form) {
-                                form.addEventListener('submit', function (event) {
-                                    if (form.checkValidity()===false){
-                                        event.preventDefault();
-                                        event.stopPropagation();
-                                    }
-                                    form.classList.add('was-validated');
-                                }, false);
-                            });
-                        }, false);
-                    })();
-                </script>
                 </form>
             </div>
         </div>
@@ -229,8 +216,12 @@
             <td>${employees.departmentName}</td>
             <td>${employees.lastPayrollDate}</td>
             <td>${employees.email}</td>
-            <td><button class="btn btn-link" onclick="editEmployee(this.parentNode.parentNode)">Edit</button> </td>
-            <td><button class="btn btn-link" onclick="deleteEmployee(this.parentNode.parentNode)">Delete</button></td>
+            <td>
+                <button class="btn btn-link" onclick="editEmployee(this.parentNode.parentNode)">Edit</button>
+            </td>
+            <td>
+                <button class="btn btn-link" onclick="deleteEmployee(this.parentNode.parentNode)">Delete</button>
+            </td>
         </tr>
     </c:forEach>
     </tbody>
@@ -240,18 +231,20 @@
 
     function saveEmployee() {
         var id = document.getElementById("id").value;
-        $.ajax({
-            type: "POST",
-            url: "${pageContext.request.contextPath}/employees/crud",
-            data: $("#addForm").serialize(),
-            success: function(data) {
-                if(id !== "")
-                    editableRow.remove();
-                printEmployee(data);
-                // Скрыть модальное окно
-                $("#employeeAddModal").modal("hide");
-            }
-        });
+        var form = document.getElementById("addForm");
+        if (form.checkValidity())
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/employees/save",
+                data: $("#addForm").serialize(),
+                success: function (data) {
+                    if (id !== "")
+                        editableRow.remove();
+                    printEmployee(data);
+                    // Скрыть модальное окно
+                    $("#employeeAddModal").modal("hide");
+                }
+            });
     }
 
     function printEmployee(employee) {
@@ -328,7 +321,7 @@
         $.ajax({
             type: "POST",
             url: "${pageContext.request.contextPath}/employees/delete/" + row.children[0].innerText,
-            success: function(data) {
+            success: function (data) {
                 row.remove();
             }
         });

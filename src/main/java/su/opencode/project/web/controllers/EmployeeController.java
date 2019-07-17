@@ -25,9 +25,9 @@ public class EmployeeController {
     @Autowired
     EmployeesDataService employeesDataService;
 
-    @PostMapping(value = "/crud", produces = "application/json")
+    @PostMapping(value = "/save", produces = "application/json")
     @ResponseBody
-    public Employees crud(
+    public Employees save(
             @RequestParam("id") Long id,
             @RequestParam("name") String name,
             @RequestParam("surname") String surname,
