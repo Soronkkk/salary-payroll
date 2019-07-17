@@ -112,7 +112,7 @@
                         <%--Salary--%>
                         <div class="col-md-4 mb-3">
                             <label for="salary">Salary</label>
-                            <input type="number" name="salary" pattern="^[0-9]*$" class="form-control" id="salary"
+                            <input type="number" min="0" name="salary" pattern="^[0-9]*$" class="form-control" id="salary"
                                    placeholder="Salary"
                                    required>
                             <div class="invalid-feedback">

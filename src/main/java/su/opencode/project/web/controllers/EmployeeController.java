@@ -70,15 +70,4 @@ public class EmployeeController {
         this.employeesDataService.deleteById(id);
         return true;
     }
-
-    @RequestMapping("/edit/{id}")
-    public ModelAndView update(@PathVariable("id") long id, Model model) {
-        model.addAttribute("employees", this.employeesDataService.findById(id));
-
-
-       // model.addAttribute("listEmployees", this.employeesDataService.findAll());
-        return getEmployeePage();
-    }
-
-
 }
