@@ -12,9 +12,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.2/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
-    <link rel="stylesheet" href="https://drvic10k.github.io/bootstrap-sortable/Contents/bootstrap-sortable.css"/>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -26,9 +25,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/bootstrap-table@1.15.2/dist/bootstrap-table.min.js"></script>
-    <script src="https://drvic10k.github.io/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
-
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -112,7 +110,8 @@
                         <%--Salary--%>
                         <div class="col-md-4 mb-3">
                             <label for="salary">Salary</label>
-                            <input type="number" min="0" name="salary" pattern="^[0-9]*$" class="form-control" id="salary"
+                            <input type="number" min="0" name="salary" pattern="^[0-9]*$" class="form-control"
+                                   id="salary"
                                    placeholder="Salary"
                                    required>
                             <div class="invalid-feedback">
@@ -188,7 +187,7 @@
 </div>
 
 </br>
-<table id="table-id" class="table table-striped table-bordered sortable" style="width:100%">
+<table id="table-id" class="table table-hover table-bordered" style="width:100%">
     <thead>
     <tr>
         <th>id</th>
@@ -228,6 +227,13 @@
 </table>
 <script>
     var editableRow;
+
+    $(document).ready(function() {
+        $('#table-id').DataTable({
+            "searching" : false,
+            "info" : false
+        });
+    });
 
     function saveEmployee() {
         var id = document.getElementById("id").value;
