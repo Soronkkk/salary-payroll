@@ -71,7 +71,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form autocomplete="off" method="post" onsubmit="return false;"
+                <form autocomplete="off" id="addForm" method="post" onsubmit="return false;"
                       class="needs-validation"
                       novalidate>
                     <input id="id" name="id" type="hidden">
@@ -88,7 +88,7 @@
                         <%--Name--%>
                         <div class="col-md-4 mb-3">
                             <label for="name">Name</label>
-                            <input type="text" name="name" pattern="^[a-zA-Z]+$" class="form-control" id="name"
+                            <input type="text" name="name" pattern="^[а-яА-Я]+$" class="form-control" id="name"
                                    placeholder="Name" required>
                             <div class="invalid-feedback">
                                 Please choose a name
@@ -100,7 +100,7 @@
                         <%--Surname--%>
                         <div class="col-md-4 mb-3">
                             <label for="surname">Surname</label>
-                            <input type="text" name="surname" pattern="^[a-zA-Z]+$" class="form-control" id="surname"
+                            <input type="text" name="surname" pattern="^[а-яА-Я]+$" class="form-control" id="surname"
                                    placeholder="Surname"
                                    required>
                             <div class="invalid-feedback">
@@ -243,17 +243,7 @@
         $.ajax({
             type: "POST",
             url: "${pageContext.request.contextPath}/employees/crud",
-            data: {
-                "id" : id,
-                "name" : document.getElementById("name").value,
-                "surname" : document.getElementById("surname").value,
-                "jobTitle" : document.getElementById("jobTitle").value,
-                "salary" : document.getElementById("salary").value,
-                "birthDate" : document.getElementById("birth-datepicker").value,
-                "department" : document.getElementById("department").value,
-                "lastPayrollDate" : document.getElementById("payroll-datepicker").value,
-                "email" : document.getElementById("email").value
-            },
+            data: $("#addForm").serialize(),
             success: function(data) {
                 if(id !== "")
                     editableRow.remove();
