@@ -32,15 +32,27 @@
     <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
 
 
-
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <style type="text/css">
-        thead th {
-            font-size: 1.0em;
-            padding: 1px !important;
-            height: 30px;
+        td, th {
+            min-width: 3em; /* the normal 'fixed' width */
+            width: 3em; /* the normal 'fixed' width */
+            max-width: 3em; /* the normal 'fixed' width, to stop the cells expanding */
+        }
+        input[type="text"]{
+            padding: 8px 12px;
+            display: block;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        table {
+            table-layout: fixed;
+            width: 100%;
         }
     </style>
 </head>
@@ -233,7 +245,7 @@
         $('#table-id thead tr:eq(1) th').each(function (i) {
             var title = $(this).text();
             if (title !== '')
-            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
 
             $('input', this).on('keyup change', function () {
                 if (table.column(i).search() !== this.value) {
