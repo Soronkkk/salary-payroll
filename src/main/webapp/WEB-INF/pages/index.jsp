@@ -248,8 +248,7 @@
         var table = $('#table-id').DataTable({
             orderCellsTop: true,
             fixedHeader: true,
-            info: false,
-            "searching":false
+            info: false
         });
     });
 
