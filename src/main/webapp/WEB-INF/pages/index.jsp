@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,22 +32,6 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $(function () {
-            $("#payroll-datepicker").datepicker({
-                dateFormat: 'yy-mm-dd',
-                changeMonth: true,
-                changeYear: true,
-                yearRange: "-100:+0"
-            });
-            $("#birth-datepicker").datepicker({
-                dateFormat: "yy-mm-dd",
-                changeMonth: true,
-                changeYear: true,
-                yearRange: "-100:+0"
-            });
-        });
-    </script>
 </head>
 <body>
 
@@ -69,24 +54,24 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form autocomplete="off" id="addForm" method="post" onsubmit="return false;"
+                <form:form autocomplete="off" id="addForm" method="post" modelAttribute="employee" onsubmit="return false;"
                       class="needs-validation">
                     <input id="id" name="id" type="hidden">
                     <div class="form-row" style="text-align: center;">
                         <%--Job Title--%>
                         <div class="col-md-4 mb-3">
-                            <label for="jobTitle">Job title</label>
-                            <select name="jobTitle" id="jobTitle" class="form-control">
-                                <option value="Developer">Developer</option>
-                                <option value="Project manager">Project manager</option>
-                                <option value="Designer">Designer</option>
-                            </select>
+                            <form:label path="jobTitle">Job title</form:label>
+                            <form:select path="jobTitle" id="jobTitle" class="form-control">
+                                <form:option value="Developer">Developer</form:option>
+                                <form:option value="Project manager">Project manager</form:option>
+                                <form:option value="Designer">Designer</form:option>
+                            </form:select>
                         </div>
                         <%--Name--%>
                         <div class="col-md-4 mb-3">
-                            <label for="name">Name</label>
-                            <input type="text" name="name" pattern="^[а-яА-Я]+$" class="form-control" id="name"
-                                   placeholder="Name" required>
+                            <form:label path="name">Name</form:label>
+                            <form:input type="text" path="name" pattern="^[а-яА-Я]+$" class="form-control" id="name"
+                                   placeholder="Name" required="required"/>
                             <div class="invalid-feedback">
                                 Please choose a name
                             </div>
@@ -96,10 +81,10 @@
                         </div>
                         <%--Surname--%>
                         <div class="col-md-4 mb-3">
-                            <label for="surname">Surname</label>
-                            <input type="text" name="surname" pattern="^[а-яА-Я]+$" class="form-control" id="surname"
+                            <form:label path="surname">Surname</form:label>
+                            <form:input type="text" path="surname" pattern="^[а-яА-Я]+$" class="form-control" id="surname"
                                    placeholder="Surname"
-                                   required>
+                                   required=""/>
                             <div class="invalid-feedback">
                                 Please choose a surname
                             </div>
@@ -109,11 +94,11 @@
                         </div>
                         <%--Salary--%>
                         <div class="col-md-4 mb-3">
-                            <label for="salary">Salary</label>
-                            <input type="number" min="0" name="salary" pattern="^[0-9]*$" class="form-control"
+                            <form:label path="salary">Salary</form:label>
+                            <form:input type="number" min="0" path="salary" pattern="^[0-9]*$" class="form-control"
                                    id="salary"
                                    placeholder="Salary"
-                                   required>
+                                   required=""/>
                             <div class="invalid-feedback">
                                 Please choose a salary
                             </div>
@@ -123,11 +108,11 @@
                         </div>
                         <%--email--%>
                         <div class="col-md-4 mb-3">
-                            <label for="email">Email</label>
-                            <input type="text" name="email" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" class="form-control"
+                            <form:label path="email">Email</form:label>
+                            <form:input type="text" path="email" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" class="form-control"
                                    id="email"
                                    placeholder="Email"
-                                   required>
+                                   required=""/>
                             <div class="invalid-feedback">
                                 Please choose a email
                             </div>
@@ -137,12 +122,12 @@
                         </div>
                         <%--Birth date--%>
                         <div class="col-md-4 mb-3">
-                            <label for="birth-datepicker">Birth date</label>
-                            <input type="text" name="birthDate"
+                            <form:label path="birthDate">Birth date</form:label>
+                            <form:input type="date" path="birthDate"
                                    pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
                                    class="form-control" id="birth-datepicker"
                                    placeholder="Birth date"
-                                   required>
+                                   required=""/>
                             <div class="invalid-feedback">
                                 Please choose a birth date
                             </div>
@@ -152,21 +137,21 @@
                         </div>
                         <%--Department--%>
                         <div class="col-md-4 mb-3">
-                            <label for="department">Department</label>
-                            <select name="department" id="department" class="form-control">
-                                <option value="Personnel department">Personnel department</option>
-                                <option value="Development department">Development department</option>
-                                <option value="Design department">Design department</option>
-                            </select>
+                            <form:label path="departmentName">Department</form:label>
+                            <form:select path="departmentName" id="department" class="form-control">
+                                <form:option value="Personnel department">Personnel department</form:option>
+                                <form:option value="Development department">Development department</form:option>
+                                <form:option value="Design department">Design department</form:option>
+                            </form:select>
                         </div>
                         <%--Last payroll date--%>
                         <div class="col-md-4 mb-3">
-                            <label for="payroll-datepicker">Last payroll date</label>
-                            <input type="text" name="lastPayrollDate"
+                            <form:label path="lastPayrollDate">Last payroll date</form:label>
+                            <form:input type="date" path="lastPayrollDate"
                                    pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
                                    class="form-control" id="payroll-datepicker"
                                    placeholder="Last payroll date"
-                                   required>
+                                   required=""/>
                             <div class="invalid-feedback">
                                 Please choose a last payroll date
                             </div>
@@ -180,7 +165,7 @@
                                 onclick="saveEmployee()">Save changes
                         </button>
                     </div>
-                </form>
+                </form:form>
             </div>
         </div>
     </div>
@@ -230,7 +215,6 @@
 
     $(document).ready(function() {
         $('#table-id').DataTable({
-            "searching" : false,
             "info" : false
         });
     });
@@ -255,47 +239,37 @@
 
     function printEmployee(employee) {
         var row = document.createElement('tr');
-
         // Employee id column
         var cell = document.createElement('td');
         cell.innerHTML = employee.id;
         row.appendChild(cell);
-
         // Employee name column
         cell = document.createElement('td');
         cell.innerHTML = employee.jobTitle;
         row.appendChild(cell);
-
         // Employee position name column
         cell = document.createElement('td');
         cell.innerHTML = employee.name;
         row.appendChild(cell);
-
         // Employee salary column
         cell = document.createElement('td');
         cell.innerHTML = employee.surname;
         row.appendChild(cell);
-
         cell = document.createElement('td');
         cell.innerHTML = employee.birthDate;
         row.appendChild(cell);
-
         cell = document.createElement('td');
         cell.innerHTML = employee.salary;
         row.appendChild(cell);
-
         cell = document.createElement('td');
         cell.innerHTML = employee.departmentName;
         row.appendChild(cell);
-
         cell = document.createElement('td');
         cell.innerHTML = employee.lastPayrollDate;
         row.appendChild(cell);
-
         cell = document.createElement('td');
         cell.innerHTML = employee.email;
         row.appendChild(cell);
-
         cell = document.createElement('td');
         var button = document.createElement('button');
         button.classList.add("btn");
@@ -304,7 +278,6 @@
         button.innerText = "Edit";
         cell.appendChild(button);
         row.appendChild(cell);
-
         cell = document.createElement('td');
         button = document.createElement('button');
         button.classList.add("btn");
@@ -313,7 +286,6 @@
         button.innerText = "Delete";
         cell.appendChild(button);
         row.appendChild(cell);
-
         document.getElementById("tbodyId").appendChild(row);
     }
 

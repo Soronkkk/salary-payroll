@@ -1,6 +1,7 @@
 package su.opencode.project.web.project.persistence.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.springframework.format.annotation.DateTimeFormat;
 import su.opencode.project.web.utils.LocalDateSerializer;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Employees extends CreatedInfo implements Serializable {
 
     @Column(name = "BIRTH_DATE", nullable = false)
     @JsonSerialize(using = LocalDateSerializer.class)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     @Column(name="SALARY", nullable = false)
@@ -39,6 +41,7 @@ public class Employees extends CreatedInfo implements Serializable {
 
     @Column (name="LAST_PAYROLL_DATE", nullable = false)
     @JsonSerialize(using = LocalDateSerializer.class)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate lastPayrollDate;
 
     @Column(name = "EMAIL", nullable = false)
