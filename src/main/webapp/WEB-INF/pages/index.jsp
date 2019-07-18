@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.dataTables.min.css">
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -28,10 +29,20 @@
             crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+
+
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style type="text/css">
+        thead th {
+            font-size: 1.0em;
+            padding: 1px !important;
+            height: 30px;
+        }
+    </style>
 </head>
 <body>
 
@@ -54,11 +65,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form:form autocomplete="off" id="addForm" method="post" modelAttribute="employee" onsubmit="return false;"
-                      class="needs-validation">
+                <form:form autocomplete="off" id="addForm" method="post" modelAttribute="employee"
+                           onsubmit="return false;"
+                           class="needs-validation">
                     <input id="id" name="id" type="hidden">
                     <div class="form-row" style="text-align: center;">
-                        <%--Job Title--%>
+                            <%--Job Title--%>
                         <div class="col-md-4 mb-3">
                             <form:label path="jobTitle">Job title</form:label>
                             <form:select path="jobTitle" id="jobTitle" class="form-control">
@@ -67,11 +79,11 @@
                                 <form:option value="Designer">Designer</form:option>
                             </form:select>
                         </div>
-                        <%--Name--%>
+                            <%--Name--%>
                         <div class="col-md-4 mb-3">
                             <form:label path="name">Name</form:label>
                             <form:input type="text" path="name" pattern="^[а-яА-Я]+$" class="form-control" id="name"
-                                   placeholder="Name" required="required"/>
+                                        placeholder="Name" required="required"/>
                             <div class="invalid-feedback">
                                 Please choose a name
                             </div>
@@ -79,12 +91,13 @@
                                 Looks good
                             </div>
                         </div>
-                        <%--Surname--%>
+                            <%--Surname--%>
                         <div class="col-md-4 mb-3">
                             <form:label path="surname">Surname</form:label>
-                            <form:input type="text" path="surname" pattern="^[а-яА-Я]+$" class="form-control" id="surname"
-                                   placeholder="Surname"
-                                   required=""/>
+                            <form:input type="text" path="surname" pattern="^[а-яА-Я]+$" class="form-control"
+                                        id="surname"
+                                        placeholder="Surname"
+                                        required=""/>
                             <div class="invalid-feedback">
                                 Please choose a surname
                             </div>
@@ -92,13 +105,13 @@
                                 Looks good
                             </div>
                         </div>
-                        <%--Salary--%>
+                            <%--Salary--%>
                         <div class="col-md-4 mb-3">
                             <form:label path="salary">Salary</form:label>
                             <form:input type="number" min="0" path="salary" pattern="^[0-9]*$" class="form-control"
-                                   id="salary"
-                                   placeholder="Salary"
-                                   required=""/>
+                                        id="salary"
+                                        placeholder="Salary"
+                                        required=""/>
                             <div class="invalid-feedback">
                                 Please choose a salary
                             </div>
@@ -106,13 +119,14 @@
                                 Looks good
                             </div>
                         </div>
-                        <%--email--%>
+                            <%--email--%>
                         <div class="col-md-4 mb-3">
                             <form:label path="email">Email</form:label>
-                            <form:input type="text" path="email" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" class="form-control"
-                                   id="email"
-                                   placeholder="Email"
-                                   required=""/>
+                            <form:input type="text" path="email" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}"
+                                        class="form-control"
+                                        id="email"
+                                        placeholder="Email"
+                                        required=""/>
                             <div class="invalid-feedback">
                                 Please choose a email
                             </div>
@@ -120,14 +134,14 @@
                                 Looks good
                             </div>
                         </div>
-                        <%--Birth date--%>
+                            <%--Birth date--%>
                         <div class="col-md-4 mb-3">
                             <form:label path="birthDate">Birth date</form:label>
                             <form:input type="date" path="birthDate"
-                                   pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
-                                   class="form-control" id="birth-datepicker"
-                                   placeholder="Birth date"
-                                   required=""/>
+                                        pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
+                                        class="form-control" id="birth-datepicker"
+                                        placeholder="Birth date"
+                                        required=""/>
                             <div class="invalid-feedback">
                                 Please choose a birth date
                             </div>
@@ -135,7 +149,7 @@
                                 Looks good
                             </div>
                         </div>
-                        <%--Department--%>
+                            <%--Department--%>
                         <div class="col-md-4 mb-3">
                             <form:label path="departmentName">Department</form:label>
                             <form:select path="departmentName" id="department" class="form-control">
@@ -144,14 +158,14 @@
                                 <form:option value="Design department">Design department</form:option>
                             </form:select>
                         </div>
-                        <%--Last payroll date--%>
+                            <%--Last payroll date--%>
                         <div class="col-md-4 mb-3">
                             <form:label path="lastPayrollDate">Last payroll date</form:label>
                             <form:input type="date" path="lastPayrollDate"
-                                   pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
-                                   class="form-control" id="payroll-datepicker"
-                                   placeholder="Last payroll date"
-                                   required=""/>
+                                        pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
+                                        class="form-control" id="payroll-datepicker"
+                                        placeholder="Last payroll date"
+                                        required=""/>
                             <div class="invalid-feedback">
                                 Please choose a last payroll date
                             </div>
@@ -184,8 +198,8 @@
         <th>Department</th>
         <th>Last payroll date</th>
         <th>Email</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody id="tbodyId">
@@ -213,9 +227,29 @@
 <script>
     var editableRow;
 
-    $(document).ready(function() {
-        $('#table-id').DataTable({
-            "info" : false
+    $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+        $('#table-id thead tr').clone(true).appendTo('#table-id thead');
+        $('#table-id thead tr:eq(1) th').each(function (i) {
+            var title = $(this).text();
+            if (title !== '')
+            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+
+            $('input', this).on('keyup change', function () {
+                if (table.column(i).search() !== this.value) {
+                    table
+                        .column(i)
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+
+        var table = $('#table-id').DataTable({
+            orderCellsTop: true,
+            fixedHeader: true,
+            info: false,
+            "searching":false
         });
     });
 
