@@ -198,7 +198,8 @@
         <th>Department</th>
         <th>Last payroll date</th>
         <th>Email</th>
-        <th colspan="2"></th>
+        <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody id="tbodyId">
